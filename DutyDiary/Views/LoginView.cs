@@ -40,7 +40,7 @@ namespace DutyDiary
 			rememberUserSwitch.TranslatesAutoresizingMaskIntoConstraints = false;
 			rememberUserSwitch.Opaque = true;
 			rememberUserSwitch.On = false;
-			rememberUserSwitch.OnTintColor = UIColor.Blue;
+			rememberUserSwitch.OnTintColor = UIColor.Brown;
 
 			rememberUserLabel = new UILabel();
 			rememberUserLabel.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -205,7 +205,7 @@ namespace DutyDiary
 			);
 			constraints.Add(
 				NSLayoutConstraint.Create(
-					this, // View we want to constrain
+					rememberUserSwitch.Superview, // View we want to constrain
 					NSLayoutAttribute.Trailing,
 					NSLayoutRelation.Equal, // Relationship
 					rememberUserSwitch, // View we want to constrain to
@@ -226,6 +226,15 @@ namespace DutyDiary
 			constraints.Add(
 				NSLayoutConstraint.Create(
 					rememberUserLabel, // View we want to constrain
+					NSLayoutAttribute.Height,
+					NSLayoutRelation.Equal, // Relationship
+					1, // Multiplier
+					rememberUserSwitch.Bounds.Height // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					rememberUserLabel, // View we want to constrain
 					NSLayoutAttribute.Top,
 					NSLayoutRelation.Equal, // Relationship
 					submitButton, // View we want to constrain to
@@ -236,13 +245,13 @@ namespace DutyDiary
 			);
 			constraints.Add(
 				NSLayoutConstraint.Create(
-					this, // View we want to constrain
+					rememberUserLabel, // View we want to constrain
 					NSLayoutAttribute.Leading,
 					NSLayoutRelation.Equal, // Relationship
-					rememberUserLabel, // View we want to constrain to
+					rememberUserLabel.Superview, // View we want to constrain to
 					NSLayoutAttribute.Leading, // Attribute to constrain to
 					1, // Multiplier
-					20 // constant
+					15 // constant
 				)
 			);
 			constraints.Add(
