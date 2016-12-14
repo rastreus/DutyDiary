@@ -9,6 +9,9 @@ namespace DutyDiary
 		public UIButton submitButton { get; }
 		public UITextField userTextField { get; }
 		public UITextField passTextField { get; }
+		public UISwitch rememberUserSwitch { get; }
+		public UISwitch rememberPassSwitch { get; }
+		public UILabel rememberUserLabel { get; }
 
 		public LoginView(CoreGraphics.CGRect bounds) : base(bounds)
 		{
@@ -33,7 +36,19 @@ namespace DutyDiary
 			passTextField.Placeholder = "Password";
 			passTextField.BorderStyle = UITextBorderStyle.RoundedRect;
 
-			var subviews = new UIView[]{ submitButton, userTextField, passTextField };
+			rememberUserSwitch = new UISwitch();
+			rememberUserSwitch.TranslatesAutoresizingMaskIntoConstraints = false;
+			rememberUserSwitch.Opaque = true;
+			rememberUserSwitch.On = false;
+			rememberUserSwitch.OnTintColor = UIColor.Blue;
+
+			rememberUserLabel = new UILabel();
+			rememberUserLabel.TranslatesAutoresizingMaskIntoConstraints = false;
+			rememberUserLabel.Text = "Remember Email Address";
+			rememberUserLabel.TextColor = UIColor.White;
+			rememberUserLabel.TextAlignment = UITextAlignment.Natural;
+
+			var subviews = new UIView[]{ submitButton, userTextField, passTextField, rememberUserSwitch, rememberUserLabel };
 			AddSubviews(subviews);
 			setupConstraints();
 		}
@@ -96,7 +111,6 @@ namespace DutyDiary
 					Frame.Width - 30 // constant
 				)
 			);
-
 			constraints.Add(
 				NSLayoutConstraint.Create(
 					passTextField, // View we want to constrain
@@ -178,7 +192,70 @@ namespace DutyDiary
 					10 // constant
 				)
 			);
-
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					rememberUserSwitch, // View we want to constrain
+					NSLayoutAttribute.Top,
+					NSLayoutRelation.Equal, // Relationship
+					submitButton, // View we want to constrain to
+					NSLayoutAttribute.Bottom, // Attribute to constrain to
+					1, // Multiplier
+					60 // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					this, // View we want to constrain
+					NSLayoutAttribute.Trailing,
+					NSLayoutRelation.Equal, // Relationship
+					rememberUserSwitch, // View we want to constrain to
+					NSLayoutAttribute.Trailing, // Attribute to constrain to
+					1, // Multiplier
+					20 // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					rememberUserSwitch, // View we want to constrain
+					NSLayoutAttribute.Width,
+					NSLayoutRelation.Equal, // Relationship
+					1, // Multiplier
+					44 // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					rememberUserLabel, // View we want to constrain
+					NSLayoutAttribute.Top,
+					NSLayoutRelation.Equal, // Relationship
+					submitButton, // View we want to constrain to
+					NSLayoutAttribute.Bottom, // Attribute to constrain to
+					1, // Multiplier
+					60 // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					this, // View we want to constrain
+					NSLayoutAttribute.Leading,
+					NSLayoutRelation.Equal, // Relationship
+					rememberUserLabel, // View we want to constrain to
+					NSLayoutAttribute.Leading, // Attribute to constrain to
+					1, // Multiplier
+					20 // constant
+				)
+			);
+			constraints.Add(
+				NSLayoutConstraint.Create(
+					rememberUserLabel, // View we want to constrain
+					NSLayoutAttribute.Trailing,
+					NSLayoutRelation.Equal, // Relationship
+					rememberUserSwitch, // View we want to constrain to
+					NSLayoutAttribute.Leading, // Attribute to constrain to
+					1, // Multiplier
+					8 // constant
+				)
+			);
 			AddConstraints(constraints.ToArray());
 		}
 	}
